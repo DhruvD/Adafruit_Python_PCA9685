@@ -14,7 +14,8 @@ import Adafruit_PCA9685
 #logging.basicConfig(level=logging.DEBUG)
 
 # Initialise the PCA9685 using the default address (0x40).
-pwm = Adafruit_PCA9685.PCA9685()
+#pwm = Adafruit_PCA9685.PCA9685()
+pwm = Adafruit_PCA9685.PCA9685(address=0x70
 
 # Alternatively specify a different address and/or bus:
 #pwm = Adafruit_PCA9685.PCA9685(address=0x41, busnum=2)
@@ -22,6 +23,9 @@ pwm = Adafruit_PCA9685.PCA9685()
 # Configure min and max servo pulse lengths
 servo_min = 150  # Min pulse length out of 4096
 servo_max = 600  # Max pulse length out of 4096
+                               
+def angle_to_pulse(angle):
+    return (2.5*angle)+150
 
 # Helper function to make setting a servo pulse width simpler.
 def set_servo_pulse(channel, pulse):
@@ -40,7 +44,22 @@ pwm.set_pwm_freq(60)
 print('Moving servo on channel 0, press Ctrl-C to quit...')
 while True:
     # Move servo on channel O between extremes.
-    pwm.set_pwm(0, 0, servo_min)
+    pwm.set_pwm(0, 0, angle_to_pulse(30))
     time.sleep(1)
-    pwm.set_pwm(0, 0, servo_max)
+    pwm.set_pwm(0, 0, angle_to_pulse(60))
     time.sleep(1)
+    pwm.set_pwm(4, 0, angle_to_pulse(90))
+    time.sleep(1)
+    pwm.set_pwm(4, 0, angle_to_pulse(120))
+    time.sleep(1)
+    pwm.set_pwm(8, 0, angle_to_pulse(30))
+    time.sleep(1)
+    pwm.set_pwm(8, 0, angle_to_pulse(180))
+    time.sleep(1)
+                               
+                               
+                               
+                               
+                               
+              
+                            
